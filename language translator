@@ -1,0 +1,45 @@
+import tkinter as tk
+from googletrans import Translator
+
+translator = Translator()
+
+window = tk.Tk()
+window.title("Language Translator")
+
+input_label = tk.Label(window, text="Input Language:")
+input_label.grid(row=0, column=0, padx=10, pady=5)
+
+input_entry = tk.Entry(window)
+input_entry.grid(row=0, column=1, padx=10, pady=5)
+
+output_label = tk.Label(window, text="Output Language:")
+output_label.grid(row=1, column=0, padx=10, pady=5)
+
+output_entry = tk.Entry(window)
+output_entry.grid(row=1, column=1, padx=10, pady=5)
+
+text_label = tk.Label(window, text="Input Text:")
+text_label.grid(row=2, column=0, padx=10, pady=5)
+
+text_entry = tk.Entry(window, width=50)
+text_entry.grid(row=2, column=1, padx=10, pady=5)
+
+translated_label = tk.Label(window, text="Translated Text:")
+translated_label.grid(row=3, column=0, padx=10, pady=5)
+
+translated_entry = tk.Entry(window, width=50)
+translated_entry.grid(row=3, column=1, padx=10, pady=5)
+
+def translate_text():
+    input_lang = input_entry.get()
+    output_lang = output_entry.get()
+    text = text_entry.get()
+
+    translation = translator.translate(text, src=input_lang, dest=output_lang)
+    translated_entry.delete(0, tk.END)
+    translated_entry.insert(0, translation.text)
+
+translate_button = tk.Button(window, text="Translate", command=translate_text)
+translate_button.grid(row=4, column=1, padx=10, pady=5)
+
+window.mainloop()
